@@ -70,17 +70,32 @@ flutter run
 
 ## Configuration
 
-1. Copy `.env` to create your environment file
-2. Add your API keys and configuration
-3. Update backend URL in frontend if needed
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# API Keys
+OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxx
+HUGGINGFACE_API_KEY=hf_xxxxxxxxxxxxxxxxxxxxx
+PINECONE_API_KEY=your-pinecone-api-key-here
+
+# Backend Configuration
+BACKEND_HOST=localhost
+BACKEND_PORT=8000
+
+# Database/Vector Store
+VECTOR_DB_PATH=./data/vector_index
+
+# Model Configuration
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+```
+
+**Note**: Never commit your actual `.env` file to version control. The `.gitignore` file is configured to exclude it.
 
 ## Contributing
 
 This is a demo project for DevFest Abeokuta 2025. Feel free to fork and extend!
-
-## License
-
-MIT License
 
 ## Resources
 
