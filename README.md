@@ -1,0 +1,87 @@
+# DevFest Abeokuta 2025 - Vector Semantic Search Demo
+
+A complete demonstration of semantic vector search using embeddings, vector indexing, and similarity queries.
+
+## Project Structure
+
+```
+├── src/
+│   └── vector_demo.py           # Standalone demo: embedding → index → query
+│
+├── backend/
+│   ├── app/
+│   │   ├── main.py              # FastAPI entrypoint
+│   │   ├── search_service.py    # Core logic
+│   │   └── __init__.py
+│   ├── requirements.txt
+│   └── README.md
+│
+├── frontend/
+│   ├── lib/
+│   │   └── main.dart            # Simple Flutter UI for queries
+│   ├── pubspec.yaml
+│   └── README.md
+│
+├── resources/
+│   ├── dataset_info.md          # Notes or link to dataset used
+│   ├── vector_visuals.png       # Optional diagrams
+│   └── references.md            # Docs & articles
+│
+├── .env                         # Template for API keys
+└── README.md
+```
+
+## Quick Start
+
+### 1. Standalone Demo
+```bash
+cd src
+python vector_demo.py
+```
+
+### 2. Backend API
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+### 3. Frontend UI
+```bash
+cd frontend
+flutter pub get
+flutter run
+```
+
+## Features
+
+- 🔍 Semantic vector search
+- 🚀 Fast similarity queries using FAISS
+- 🌐 RESTful API with FastAPI
+- 📱 Cross-platform Flutter UI
+- 🎯 Easy-to-understand demo code
+
+## Technologies Used
+
+- **Backend**: Python, FastAPI, FAISS, Sentence Transformers
+- **Frontend**: Flutter/Dart
+- **Vector Search**: FAISS (Facebook AI Similarity Search)
+- **Embeddings**: Sentence Transformers
+
+## Configuration
+
+1. Copy `.env` to create your environment file
+2. Add your API keys and configuration
+3. Update backend URL in frontend if needed
+
+## Contributing
+
+This is a demo project for DevFest Abeokuta 2025. Feel free to fork and extend!
+
+## License
+
+MIT License
+
+## Resources
+
+See `resources/references.md` for additional documentation and learning materials.
