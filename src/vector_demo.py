@@ -1,5 +1,9 @@
 # Standalone demo: embedding → index → query
 # This file demonstrates the complete vector search workflow
+class Settings:
+    # load keys from .env or os.env in init and pass to created class members 
+    pass
+
 
 def main():
     """
@@ -16,9 +20,11 @@ def checkAllKeys():
 
 
 def createEmbedding():
+    # create with open ai "text-embedding-3-large" 
     pass
 
 def checkSampleDataModelAndEmbeddingSize():
+    # maybe a list of array of sentences here
     pass
 
 def dotEmbeddingSimilarity():
