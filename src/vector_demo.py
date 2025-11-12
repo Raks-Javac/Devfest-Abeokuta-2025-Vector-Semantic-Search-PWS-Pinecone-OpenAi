@@ -11,6 +11,7 @@ def main():
     1. Creating embeddings
     2. Building vector index
     3. Performing similarity search
+    4. Test
     """
     pass
 
