@@ -17,6 +17,7 @@ def main():
 
 def checkAllKeys():
     # check pinecone, open ai, embedding type and your dataset key from settings class 
+    # check for pinecona and open ai keys here 
     pass
 
 
