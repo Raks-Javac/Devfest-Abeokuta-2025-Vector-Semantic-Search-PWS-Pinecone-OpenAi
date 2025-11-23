@@ -1,33 +1,78 @@
 # Standalone demo: embedding → index → query
 # This file demonstrates the complete vector search workflow
-class Settings:
-    # load keys from .env or os.env in init and pass to created class members 
-    pass
+import os
+import dotenv
+import openai
 
+# Load environment variables from .env file (searches in current and parent directories)
+dotenv.load_dotenv(dotenv.find_dotenv())
+
+class Settings:
+     
+    def __init__(self) -> None:
+        self.pinecone_api_key = os.getenv("PINECONE_API_KEY")
+        self.open_api_key = os.getenv("OPENAI_API_KEY")
+        self.embedding_model = "text-embedding-3-large"
+    
+    def getAllInitValues(self):
+        if not self.pinecone_api_key or not self.open_api_key:
+            print("Warning: API keys not found. Please check your .env file.")
+        else:
+            print(
+                f"""
+    App Settings values:
+    1. PINECONE: {self.pinecone_api_key}
+    2. OPEN_AI_KEY: {self.open_api_key}
+    3. OPEN_AI_EMBEDDING_MODEL: {self.embedding_model}
+    """
+        )
+
+
+
+# initialize settings object
+settings = Settings()
 
 def main():
-    """
-    Main function to demonstrate:
-    1. Creating embeddings
-    2. Building vector index
-    3. Performing similarity search
-    4. Test
-    """
-    pass
+    checkAllKeys()
+    checkSampleDataModelAndcreateEmbedding()
+    
+    
+    
+    
 
 def checkAllKeys():
     # check pinecone, open ai, embedding type and your dataset key from settings class 
     # check for pinecona and open ai keys here 
-    pass
+    settings.getAllInitValues()
 
 
-def createEmbedding():
-    # create with open ai "text-embedding-3-large" 
-    pass
 
-def checkSampleDataModelAndEmbeddingSize():
-    # maybe a list of array of sentences here
-    pass
+
+
+def checkSampleDataModelAndcreateEmbedding():
+    # 1. Define a list of sample sentences for embedding
+    sentences = [
+    "the hive of bees protect their queen",          #0
+    "a beehive is an enclosed structure in which honet bees live",   #1
+    "a condominium is a an enclosed structure in which people luve",    #2
+    "the flying hive has bees in it"          #3
+    ] 
+    print(f"Embedding raw sample data: {sentences}") # Print the raw sample data
+
+    # 2. Use the new v1 API for embeddings to create embedding from data
+    res = openai.embeddings.create(input=sentences, model=settings.embedding_model)
+
+    # 3. Extract the embedding vectors from the API response, visualizing this .. [[vector1],[vector2],[vector3],[vector4]]
+    embeds = [r.embedding for r in res.data] 
+
+    # 4. Print the full embedding results
+    # print(f"Embedding sample result: {embeds}") 
+
+    # 5. Print the number of embeddings generated
+    print(f"Embedding length: {len(embeds)}") 
+
+
+
 
 def dotEmbeddingSimilarity():
     # dot product fomular between vector for similarity , 
@@ -64,6 +109,3 @@ def semanticSearch():
 
 if __name__ == "__main__":
     main()
-
-
-print(main())

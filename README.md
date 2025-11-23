@@ -31,6 +31,22 @@ A complete demonstration of semantic vector search using embeddings, vector inde
 └── README.md
 ```
 
+## Setup
+
+### Virtual Environment
+
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# Windows
+.\venv\Scripts\activate
+
+# macOS/Linux
+source venv/bin/activate
+```
+
 ## Quick Start
 
 ### 1. Standalone Demo
