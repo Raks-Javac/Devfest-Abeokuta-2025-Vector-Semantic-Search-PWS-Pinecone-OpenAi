@@ -64,6 +64,7 @@ class SearchService {
         body: jsonEncode({
           'query': query,
           'top_k': 10,
+          'index_name': 'embedding-search',
         }),
       );
 
@@ -72,9 +73,11 @@ class SearchService {
         final List<dynamic> matches = data['matches'];
         return matches.map((json) => SearchResult.fromJson(json)).toList();
       } else {
+        print(response.body);
         throw Exception('Failed to load search results');
       }
     } catch (e) {
+      print(e);
       throw Exception('Error searching: $e');
     }
   }
@@ -124,18 +127,30 @@ class _SemanticSearchPageState extends State<SemanticSearchPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeader(),
-            _buildSearchBar(),
+            const HeaderWidget(),
+            SearchBarWidget(
+              controller: _searchController,
+              onSubmitted: _performSearch,
+            ),
             Expanded(
-              child: _buildResultsList(),
+              child: ResultsListWidget(
+                isLoading: _isLoading,
+                error: _error,
+                results: _results,
+              ),
             ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildHeader() {
+class HeaderWidget extends StatelessWidget {
+  const HeaderWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -161,8 +176,20 @@ class _SemanticSearchPageState extends State<SemanticSearchPage> {
       ),
     );
   }
+}
 
-  Widget _buildSearchBar() {
+class SearchBarWidget extends StatelessWidget {
+  final TextEditingController controller;
+  final Function(String) onSubmitted;
+
+  const SearchBarWidget({
+    super.key,
+    required this.controller,
+    required this.onSubmitted,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       decoration: BoxDecoration(
@@ -177,8 +204,8 @@ class _SemanticSearchPageState extends State<SemanticSearchPage> {
         ],
       ),
       child: TextField(
-        controller: _searchController,
-        onSubmitted: _performSearch,
+        controller: controller,
+        onSubmitted: onSubmitted,
         style: GoogleFonts.outfit(fontSize: 16),
         decoration: InputDecoration(
           hintText: 'Search for anything...',
@@ -187,7 +214,7 @@ class _SemanticSearchPageState extends State<SemanticSearchPage> {
           suffixIcon: IconButton(
             icon: const Icon(Icons.arrow_forward_rounded,
                 color: Color(0xFF6C63FF)),
-            onPressed: () => _performSearch(_searchController.text),
+            onPressed: () => onSubmitted(controller.text),
           ),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(20),
@@ -195,9 +222,23 @@ class _SemanticSearchPageState extends State<SemanticSearchPage> {
       ),
     ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2);
   }
+}
 
-  Widget _buildResultsList() {
-    if (_isLoading) {
+class ResultsListWidget extends StatelessWidget {
+  final bool isLoading;
+  final String? error;
+  final List<SearchResult> results;
+
+  const ResultsListWidget({
+    super.key,
+    required this.isLoading,
+    this.error,
+    required this.results,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading) {
       return const Center(
         child: CircularProgressIndicator(
           color: Color(0xFF6C63FF),
@@ -205,12 +246,12 @@ class _SemanticSearchPageState extends State<SemanticSearchPage> {
       );
     }
 
-    if (_error != null) {
+    if (error != null) {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Text(
-            _error!,
+            error!,
             style: GoogleFonts.outfit(color: Colors.red),
             textAlign: TextAlign.center,
           ),
@@ -218,7 +259,7 @@ class _SemanticSearchPageState extends State<SemanticSearchPage> {
       );
     }
 
-    if (_results.isEmpty) {
+    if (results.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -239,17 +280,35 @@ class _SemanticSearchPageState extends State<SemanticSearchPage> {
 
     return ListView.builder(
       padding: const EdgeInsets.all(24),
-      itemCount: _results.length,
+      itemCount: results.length,
       itemBuilder: (context, index) {
-        final result = _results[index];
+        final result = results[index];
         final isTopMatch = index == 0;
 
-        return _buildResultCard(result, index, isTopMatch);
+        return ResultCardWidget(
+          result: result,
+          index: index,
+          isTopMatch: isTopMatch,
+        );
       },
     );
   }
+}
 
-  Widget _buildResultCard(SearchResult result, int index, bool isTopMatch) {
+class ResultCardWidget extends StatelessWidget {
+  final SearchResult result;
+  final int index;
+  final bool isTopMatch;
+
+  const ResultCardWidget({
+    super.key,
+    required this.result,
+    required this.index,
+    required this.isTopMatch,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
