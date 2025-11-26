@@ -270,6 +270,7 @@ async def semantic_search(request: SearchRequest):
             query=request.query, matches=search_matches, count=len(search_matches)
         )
     except Exception as e:
+        print(f"Error in semantic search: {e}, type: {type(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to perform search: {str(e)}",
