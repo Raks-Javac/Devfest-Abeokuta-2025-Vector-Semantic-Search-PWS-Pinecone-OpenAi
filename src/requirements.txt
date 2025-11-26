@@ -2,3 +2,8 @@ openai
 pinecone
 datasets
 dotenv
+seaborn
+numpy   
+matplotlib
+pandas
+tqdm
