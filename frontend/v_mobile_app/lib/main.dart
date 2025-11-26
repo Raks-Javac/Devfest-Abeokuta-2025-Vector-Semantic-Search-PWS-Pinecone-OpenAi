@@ -54,7 +54,7 @@ class SearchResult {
 // API Service
 class SearchService {
   static const String baseUrl =
-      'https://devfest-abeokuta-2025-vector-semantic-q0w3.onrender.com';
+      '';
 
   Future<List<SearchResult>> search(String query) async {
     try {

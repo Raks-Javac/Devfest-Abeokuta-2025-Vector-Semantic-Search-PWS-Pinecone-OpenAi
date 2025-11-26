@@ -66,7 +66,7 @@ lib/
 ## 🔌 API Integration
 
 The app connects to the deployed backend at:
-`https://devfest-abeokuta-2025-vector-semantic-q0w3.onrender.com`
+`BASEURL`
 
 It sends a POST request to `/api/search` with the following body:
 
