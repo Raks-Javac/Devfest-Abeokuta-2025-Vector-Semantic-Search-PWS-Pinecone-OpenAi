@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: vector-search-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: ./backend
+    envVars:
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: PORT
+        value: 8000
+    healthCheckPath: /health
