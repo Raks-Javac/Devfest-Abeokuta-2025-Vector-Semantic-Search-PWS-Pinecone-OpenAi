@@ -53,8 +53,7 @@ class SearchResult {
 
 // API Service
 class SearchService {
-  static const String baseUrl =
-      '';
+  static const String baseUrl = '';
 
   Future<List<SearchResult>> search(String query) async {
     try {

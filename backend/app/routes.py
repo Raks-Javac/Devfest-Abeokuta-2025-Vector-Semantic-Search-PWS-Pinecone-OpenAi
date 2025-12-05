@@ -21,7 +21,7 @@ from .models import (
     ConfigResponse,
 )
 from .search_service import VectorSearchService
-from .config import get_settings
+# from .config import get_settings
 
 # Create router
 router = APIRouter()
@@ -38,23 +38,23 @@ def get_service():
         )
 
 
-# Health and Config Endpoints
-@router.get("/health", response_model=HealthResponse, tags=["Health"])
-async def health_check():
-    """Check API health and configuration status"""
-    settings = get_settings()
-    return HealthResponse(
-        status="healthy",
-        api_keys_configured=settings.validate_keys(),
-        embedding_model=settings.embedding_model,
-    )
+# # Health and Config Endpoints
+# @router.get("/health", response_model=HealthResponse, tags=["Health"])
+# async def health_check():
+#     """Check API health and configuration status"""
+#     settings = get_settings()
+#     return HealthResponse(
+#         status="healthy",
+#         api_keys_configured=settings.validate_keys(),
+#         embedding_model=settings.embedding_model,
+#     )
 
 
-@router.get("/config", response_model=ConfigResponse, tags=["Health"])
-async def get_config():
-    """Get configuration information"""
-    settings = get_settings()
-    return ConfigResponse(**settings.get_config_info())
+# @router.get("/config", response_model=ConfigResponse, tags=["Health"])
+# async def get_config():
+#     """Get configuration information"""
+#     settings = get_settings()
+#     return ConfigResponse(**settings.get_config_info())
 
 
 # Embedding Endpoints
