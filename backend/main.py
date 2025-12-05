@@ -30,12 +30,12 @@ app.add_middleware(
 app.include_router(router)
 
 
-@app.get("/")
-async def root():
-    """Root endpoint with API information"""
-    return {
-        "message": "Vector Search API is running",
-        "version": "1.0.0",
-        "docs": "/docs",
-        "health": "/health",
-    }
+# @app.get("/")
+# async def root():
+#     """Root endpoint with API information"""
+#     return {
+#         "message": "Vector Search API is running",
+#         "version": "1.0.0",
+#         "docs": "/docs",
+#         "health": "/health",
+#     }
