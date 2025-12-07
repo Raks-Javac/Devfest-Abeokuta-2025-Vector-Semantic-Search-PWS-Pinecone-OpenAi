@@ -12,6 +12,20 @@ A complete demonstration of semantic vector search using OpenAI embeddings, Pine
 - 🐳 **Docker Ready**: Containerized for easy deployment
 - ☁️ **Render Deployment**: One-click deployment configuration
 
+## 🎬 Demo
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Raks-Javac/Devfest-Abeokuta-2025-Vector-Semantic-Search-PWS-Pinecone-OpenAi/main/screenshots/demo.gif" alt="Vector Semantic Search Demo" width="800"/>
+  
+  <p><em>Semantic search in action - finding relevant results using natural language queries</em></p>
+</div>
+
+### 📸 Screenshots
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Raks-Javac/Devfest-Abeokuta-2025-Vector-Semantic-Search-PWS-Pinecone-OpenAi/main/screenshots/screen_shot_1.png" alt="Application Screenshot" width="600"/>
+</div>
+
 ## Project Structure
 
 ```
