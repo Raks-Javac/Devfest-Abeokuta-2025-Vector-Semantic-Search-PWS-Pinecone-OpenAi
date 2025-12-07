@@ -91,6 +91,7 @@ def checkSampleDataModelAndcreateEmbedding():
     embed_ints = []
     for r in embeds:
         embed_ints.append(len(r))
+    # Sample embedding length: [[3072], [3072], [3072], [3072]]
     print(f"Embedding length: {embed_ints}")
 
 
